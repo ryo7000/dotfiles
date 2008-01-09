@@ -1,6 +1,5 @@
-autoload -U compinit promptinit
+autoload -U compinit
 compinit;
-promptinit;
 
 # cache
 zstyle ':completion::complete:*' use-cache 1
