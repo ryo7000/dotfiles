@@ -133,6 +133,7 @@ case ${TERM} in
 		;;
 esac
 
+export TIMEFMT=$'%J : \n real\t%*Es\n user\t%*Us\n sys \t%*Ss\n cpu \t%P'
 export LANG="ja_JP.eucJP"
 export MANPAGER="less -r"
 export SVN_EDITOR="vim"
