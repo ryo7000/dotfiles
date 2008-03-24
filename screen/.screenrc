@@ -1,4 +1,4 @@
-escape ^z^z
+escape ^l^l
 hardstatus alwayslastline "%w"
 
 ## http://frexx.de/xterm-256-notes/
