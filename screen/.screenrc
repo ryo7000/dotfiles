@@ -6,3 +6,6 @@ hardstatus alwayslastline "%w"
 defbce "on"
 # do not use 'screen-bce'
 term xterm-256color
+
+defencoding utf-8
+encoding utf-8
