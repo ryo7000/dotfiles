@@ -1,0 +1,15 @@
+[user]
+	name = ryo
+	email = ryo@live-emotion.com
+[core]
+	excludesfile = /home/ryo/.gitignore
+[alias]
+    di = diff
+	ci = commit
+	co = checkout
+	st = status
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	interactive = auto
