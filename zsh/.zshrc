@@ -112,8 +112,8 @@ SAVEHIST=100000
 setopt prompt_subst
 
 autoload -U colors; colors
-PROMPT='${WINDOW:+"[$WINDOW]"}%{$fg[green]%}`whoami`@`hostname` %#%{$reset_color%} '
-RPROMPT='%{$fg[yellow]%}[%(4~,%-1~/.../%2~,%~)%{$fg[red]%}:%!%{$fg[yellow]%}]%{$reset_color%}'
+PROMPT='${WINDOW:+"[$WINDOW]"}%{$fg[green]%}%n@%m %#%{$reset_color%} '
+RPROMPT='%{$fg[yellow]%}[%~]%{$reset_color%}'
 
 ## import from Gentoo .bashrc
 # Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
