@@ -134,13 +134,13 @@ case ${TERM} in
 esac
 
 export TIMEFMT=$'%J : \n real\t%*Es\n user\t%*Us\n sys \t%*Ss\n cpu \t%P'
-export LANG="ja_JP.eucJP"
+export LANG="ja_JP.utf8"
 export MANPAGER="less -r"
 export SVN_EDITOR="vim"
 export PATH="$HOME/bin:$PATH"
 
 # psqlの出力エンコーディング設定
-export PGCLIENTENCODING="EUC-JP"
+export PGCLIENTENCODING="UTF-8"
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
@@ -159,3 +159,15 @@ alias mobileimap='mobileimap -d -a LOGIN -s www.live-emotion.com -i 050010102779
 
 alias mboxtrain='/usr/bin/sb_mboxtrain.py -n -g ~/Maildir/.Bayes.ham/ -s ~/Maildir/.Bayes.spam/'
 alias -g TIME="| awk '{print strftime(\"%Y-%m-%d %H:%M:%S\",\$1)}'"
+
+alias -g Rdev="RAILS_ENV=development"
+alias -g Rtest="RAILS_ENV=test"
+alias -g Rpro="RAILS_ENV=production"
+
+alias update_rails_tags="ctags -R --languages=ruby -f rails_tags \
+/usr/lib/ruby/gems/1.8/gems/actionmailer-2.0.2 \
+/usr/lib/ruby/gems/1.8/gems/actionpack-2.0.2 \
+/usr/lib/ruby/gems/1.8/gems/activerecord-2.0.2 \
+/usr/lib/ruby/gems/1.8/gems/activeresource-2.0.2 \
+/usr/lib/ruby/gems/1.8/gems/activesupport-2.0.2 \
+/usr/lib/ruby/gems/1.8/gems/rails-2.0.2"
