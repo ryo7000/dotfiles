@@ -134,8 +134,6 @@ case ${TERM} in
 esac
 
 export TIMEFMT=$'%J : \n real\t%*Es\n user\t%*Us\n sys \t%*Ss\n cpu \t%P'
-export LANG="ja_JP.utf8"
-export MANPAGER="less -r"
 export SVN_EDITOR="vim"
 export PATH="$HOME/bin:$PATH"
 
@@ -144,6 +142,9 @@ export PGCLIENTENCODING="UTF-8"
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+
+# for euc-jp manpage
+alias man="man -P \"cat | nkf -w | /usr/bin/less\""
 
 # colors for ls, etc.
 alias d="ls --color"
