@@ -6,8 +6,15 @@ zstyle ':completion::complete:*' use-cache 1
 
 # viÊÔ½¸¥â¡¼¥É
 bindkey -v
-bindkey '^P' history-beginning-search-backward
-bindkey '^N' history-beginning-search-forward
+
+# ¾å²¼¥­¡¼¤ÈCtrl-p, n¤ÇÍúÎò¸¡º÷¡Ê¥«¡¼¥½¥ë¤Ï¹ÔËö¡Ë
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey '^P' history-beginning-search-backward-end
+bindkey '^N' history-beginning-search-forward-end
+bindkey '[A' history-beginning-search-backward-end
+bindkey '[B' history-beginning-search-forward-end
 bindkey '^R' history-incremental-search-backward
 
 # http://d.hatena.ne.jp/cooldaemon/searchdiary?word=*%5Bzsh%5D
