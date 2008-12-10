@@ -122,14 +122,6 @@ autoload -U colors; colors
 PROMPT='${WINDOW:+"[$WINDOW]"}%{$fg[green]%}%n@%m %#%{$reset_color%} '
 RPROMPT='%{$fg[yellow]%}[%~]%{$reset_color%}'
 
-## import from Gentoo .bashrc
-# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
-if [[ -f ~/.dir_colors ]] ; then
-	eval $(dircolors -b ~/.dir_colors)
-elif [[ -f /etc/DIR_COLORS ]] ; then
-	eval $(dircolors -b /etc/DIR_COLORS)
-fi
-
 # Change the window title of X terminals 
 case ${TERM} in
 	xterm*|rxvt*|Eterm|aterm|kterm|gnome)
@@ -144,14 +136,8 @@ export TIMEFMT=$'%J : \n real\t%*Es\n user\t%*Us\n sys \t%*Ss\n cpu \t%P'
 export SVN_EDITOR="vim"
 export PATH="$HOME/bin:$PATH"
 
-# psqlの出力エンコーディング設定
-export PGCLIENTENCODING="UTF-8"
-
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-
-# for euc-jp manpage
-alias man="man -P \"cat | nkf -w | /usr/bin/less\""
 
 # colors for ls, etc.
 alias d="ls --color"
@@ -161,21 +147,7 @@ alias cp="cp -i"
 alias rm="rm -i"
 alias mv="mv -i"
 alias google="w3m www.google.co.jp"
-alias apnic="w3m http://ftp.apnic.net/stats/apnic/"
-
-alias mobileimap='mobileimap -d -a LOGIN -s www.live-emotion.com -i 05001010277945_ab.ezweb.ne.jp'
-
-alias mboxtrain='/usr/bin/sb_mboxtrain.py -n -g ~/Maildir/.Bayes.ham/ -s ~/Maildir/.Bayes.spam/'
 alias -g TIME="| awk '{print strftime(\"%Y-%m-%d %H:%M:%S\",\$1)}'"
 
-alias -g Rdev="RAILS_ENV=development"
-alias -g Rtest="RAILS_ENV=test"
-alias -g Rpro="RAILS_ENV=production"
-
-alias update_rails_tags="ctags -R --languages=ruby -f rails_tags \
-/usr/lib/ruby/gems/1.8/gems/actionmailer-2.0.2 \
-/usr/lib/ruby/gems/1.8/gems/actionpack-2.0.2 \
-/usr/lib/ruby/gems/1.8/gems/activerecord-2.0.2 \
-/usr/lib/ruby/gems/1.8/gems/activeresource-2.0.2 \
-/usr/lib/ruby/gems/1.8/gems/activesupport-2.0.2 \
-/usr/lib/ruby/gems/1.8/gems/rails-2.0.2"
+# local設定の読み込み
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
