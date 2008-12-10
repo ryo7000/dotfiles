@@ -148,6 +148,7 @@ alias rm="rm -i"
 alias mv="mv -i"
 alias google="w3m www.google.co.jp"
 alias -g TIME="| awk '{print strftime(\"%Y-%m-%d %H:%M:%S\",\$1)}'"
+alias -g UTIME="| awk '{print strftime(\"%Y-%m-%d %H:%M:%S %Z\",\$1,1)}'"  # from awk 3.1.6
 
 # local設定の読み込み
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
