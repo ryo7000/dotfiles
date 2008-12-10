@@ -151,5 +151,21 @@ alias google="w3m www.google.co.jp"
 alias -g TIME="| awk '{print strftime(\"%Y-%m-%d %H:%M:%S\",\$1)}'"
 alias -g UTIME="| awk '{print strftime(\"%Y-%m-%d %H:%M:%S %Z\",\$1,1)}'"  # from awk 3.1.6
 
+# dabbrev
+# from http://d.hatena.ne.jp/secondlife/20060108/1136650653
+HARDCOPYFILE=.screen-hardcopy
+touch $HARDCOPYFILE
+
+dabbrev-complete () {
+        local reply lines=80 # 80行分
+        screen -X eval "hardcopy -h $HARDCOPYFILE"
+        reply=($(sed '/^$/d' $HARDCOPYFILE | sed '$ d' | tail -$lines))
+        compadd - "${reply[@]%[*/=@|]}"
+}
+
+zle -C dabbrev-complete menu-complete dabbrev-complete
+bindkey '^o' dabbrev-complete
+bindkey '^o^_' reverse-menu-complete
+
 # local設定の読み込み
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
