@@ -4,10 +4,10 @@ compinit;
 # cache
 zstyle ':completion::complete:*' use-cache 1
 
-# vi�Խ��⡼��
+# vi編集モード
 bindkey -v
 
-# �岼������Ctrl-p, n�����򸡺��ʥ�������Ϲ�����
+# 上下キーとCtrl-p, nで履歴検索（カーソルは行末）
 autoload history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
@@ -20,102 +20,102 @@ bindkey '^R' history-incremental-search-backward
 # http://d.hatena.ne.jp/cooldaemon/searchdiary?word=*%5Bzsh%5D
 # http://hatena.g.hatena.ne.jp/hatenatech/20060517/1147833430
 
-# ʣ���� zsh ��Ʊ���˻Ȥ����ʤ� history �ե�����˾�񤭤����ɲä���
+# 複数の zsh を同時に使う時など history ファイルに上書きせず追加する
 setopt append_history
 
-# ���ꤷ�����ޥ��̾���ʤ����ǥ��쥯�ȥ�̾�Ȱ��פ������ cd ����
+# 指定したコマンド名がなく、ディレクトリ名と一致した場合 cd する
 setopt auto_cd
 
-# �䴰���䤬ʣ��������ˡ�����ɽ������
+# 補完候補が複数ある時に、一覧表示する
 setopt auto_list
 
-# �䴰������Tab, Ctrl+I) ��Ϣ�Ǥ�������ǽ���䴰�����ư���䴰����
+# 補完キー（Tab, Ctrl+I) を連打するだけで順に補完候補を自動で補完する
 setopt auto_menu
 
-# ���å����б��ʤɤ�ưŪ���䴰����
+# カッコの対応などを自動的に補完する
 setopt auto_param_keys
 
-# �ǥ��쥯�ȥ�̾���䴰�������� / ��ưŪ���ղä��������䴰��������
+# ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
 setopt auto_param_slash
 
-# �ӡ��ײ����Ĥ餵�ʤ��褦�ˤ���
+# ビープ音を鳴らさないようにする
 setopt NO_beep
 
-# {a-c} �� a b c ��Ÿ�����뵡ǽ��Ȥ���褦�ˤ���
+# {a-c} を a b c に展開する機能を使えるようにする
 setopt brace_ccl
 
-# ���ޥ�ɤΥ��ڥ�����å��򤹤�
+# コマンドのスペルチェックをする
 setopt correct
 
-# =command �� command �Υѥ�̾��Ÿ������
+# =command を command のパス名に展開する
 setopt equals
 
-# �ե�����̾�� #, ~, ^ �� 3 ʸ��������ɽ���Ȥ��ư���
+# ファイル名で #, ~, ^ の 3 文字を正規表現として扱う
 setopt extended_glob
 
-# Ctrl+S/Ctrl+Q �ˤ��ե��������Ȥ�ʤ��褦�ˤ���
+# Ctrl+S/Ctrl+Q によるフロー制御を使わないようにする
 setopt no_flow_control
 stty -ixon
 
-# ľ����Ʊ�����ޥ�ɥ饤��ϥҥ��ȥ���ɲä��ʤ�
+# 直前と同じコマンドラインはヒストリに追加しない
 setopt hist_ignore_dups
 
-# ���ޥ�ɥ饤�����Ƭ�����ڡ����ǻϤޤ���ҥ��ȥ���ɲä��ʤ�
+# コマンドラインの先頭がスペースで始まる場合ヒストリに追加しない
 setopt hist_ignore_space
 
-# �ҥ��ȥ��ƤӽФ��Ƥ���¹Ԥ���֤˰�ö�Խ��Ǥ�����֤ˤʤ�
+# ヒストリを呼び出してから実行する間に一旦編集できる状態になる
 setopt hist_verify
 
-# �����뤬��λ���Ƥ�΢����֤� HUP �����ʥ������ʤ��褦�ˤ���
+# シェルが終了しても裏ジョブに HUP シグナルを送らないようにする
 setopt NO_hup
 
-# ���ޥ�ɥ饤��Ǥ� # �ʹߤ򥳥��Ȥȸ��ʤ�
+# コマンドラインでも # 以降をコメントと見なす
 setopt interactive_comments
 
-# auto_list ���䴰��������ǡ�ls -F �Τ褦�˥ե�����μ��̤�ޡ���ɽ��
+# auto_list の補完候補一覧で、ls -F のようにファイルの種別をマーク表示
 setopt list_types
 
-# �������ޥ�� jobs �ν��Ϥ�ǥե���Ȥ� jobs -l �ˤ���
+# 内部コマンド jobs の出力をデフォルトで jobs -l にする
 setopt long_list_jobs
 
-# ���ޥ�ɥ饤��ΰ����� --prefix=/usr �ʤɤ� = �ʹߤǤ��䴰�Ǥ���
+# コマンドラインの引数で --prefix=/usr などの = 以降でも補完できる
 setopt magic_equal_subst
 
-# �ե�����̾��Ÿ���ǥǥ��쥯�ȥ�˥ޥå�������������� / ���ղä���
+# ファイル名の展開でディレクトリにマッチした場合末尾に / を付加する
 setopt mark_dirs
 
-# �ե�����̾��Ÿ���ǡ������ǤϤʤ�����Ū�˥����Ȥ����褦�ˤʤ�
+# ファイル名の展開で、辞書順ではなく数値的にソートされるようになる
 setopt numeric_glob_sort
 
-# 8 �ӥå��ܤ��̤��褦�ˤʤꡢ���ܸ�Υե�����̾�ʤɤ򸫤��褦�ˤʤ�
+# 8 ビット目を通すようになり、日本語のファイル名などを見れるようになる
 setopt print_eightbit
 
-# ������Υץ��������Ȥ������ͭ
+# シェルのプロセスごとに履歴を共有
 setopt share_history
 
-# history (fc -l) ���ޥ�ɤ�ҥ��ȥ�ꥹ�Ȥ����������
+# history (fc -l) コマンドをヒストリリストから取り除く。
 setopt hist_no_store
 
-# ʸ���������˲��ԥ����ɤ�̵�����Ǥ�ɽ������
+# 文字列末尾に改行コードが無い場合でも表示する
 unsetopt promptcr
 
-#���ԥڤλ�rprompt����ɽ������
+#コピペの時rpromptを非表示する
 setopt transient_rprompt
 
-# cd -[tab] ��pushd
+# cd -[tab] でpushd
 setopt autopushd
 
-# ��ʣ�ǥ��쥯�ȥ��pushd���ʤ�
+# 重複ディレクトリはpushdしない
 setopt pushd_ignore_dups
 
-# ����ե�����˻����Ͽ
+# 履歴ファイルに時刻を記録
 setopt extended_history
 HISTFILE=$HOME/.zsh-history
 HISTSIZE=100000
 SAVEHIST=100000
 
-# prompt����
-# ����Ȥ�
+# prompt設定
+# 色を使う
 setopt prompt_subst
 
 autoload -U colors; colors
@@ -144,7 +144,7 @@ export TIMEFMT=$'%J : \n real\t%*Es\n user\t%*Us\n sys \t%*Ss\n cpu \t%P'
 export SVN_EDITOR="vim"
 export PATH="$HOME/bin:$PATH"
 
-# psql�ν��ϥ��󥳡��ǥ�������
+# psqlの出力エンコーディング設定
 export PGCLIENTENCODING="UTF-8"
 
 alias ls='ls --color=auto'
