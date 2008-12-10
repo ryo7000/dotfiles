@@ -3,6 +3,7 @@ compinit;
 
 # cache
 zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}  # ファイル補完時に色付け
 
 # vi編集モード
 bindkey -v
