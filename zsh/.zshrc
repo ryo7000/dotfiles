@@ -135,7 +135,7 @@ esac
 
 export TIMEFMT=$'%J : \n real\t%*Es\n user\t%*Us\n sys \t%*Ss\n cpu \t%P'
 export SVN_EDITOR="vim"
-export PATH="$HOME/bin:$PATH"
+export PATH=$HOME/bin:$PATH
 
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
@@ -153,7 +153,7 @@ alias -g UTIME="| awk '{print strftime(\"%Y-%m-%d %H:%M:%S %Z\",\$1,1)}'"  # fro
 
 # dabbrev
 # from http://d.hatena.ne.jp/secondlife/20060108/1136650653
-HARDCOPYFILE=.screen-hardcopy
+HARDCOPYFILE=$HOME/.screen-hardcopy
 touch $HARDCOPYFILE
 
 dabbrev-complete () {
