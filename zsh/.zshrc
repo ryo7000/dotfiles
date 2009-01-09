@@ -19,8 +19,8 @@ zle -N history-beginning-search-forward-end history-search-end
 # Ctrl-p, n, ↑, ↓で前方一致検索
 bindkey '^P' history-beginning-search-backward-end
 bindkey '^N' history-beginning-search-forward-end
-bindkey '[A' history-beginning-search-backward-end # ↑キー
-bindkey '[B' history-beginning-search-forward-end  # ↓キー
+bindkey '^[[A' history-beginning-search-backward-end # ↑キー
+bindkey '^[[B' history-beginning-search-forward-end  # ↓キー
 
 # Ctrl-rでインクリメンタルサーチ
 bindkey '^R' history-incremental-search-backward
