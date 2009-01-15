@@ -25,6 +25,9 @@ bindkey '^[[B' history-beginning-search-forward-end  # ↓キー
 # Ctrl-rでインクリメンタルサーチ
 bindkey '^R' history-incremental-search-backward
 
+# Ctrl-eで、過去の最後の引数を挿入
+bindkey '^E' insert-last-word
+
 # --------------------------------------------------------------------------------
 # 補完設定
 # --------------------------------------------------------------------------------
