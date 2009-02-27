@@ -147,8 +147,23 @@ setopt transient_rprompt
 setopt prompt_subst
 
 autoload -U colors; colors
-PROMPT='${WINDOW:+"[$WINDOW]"}%{$fg[green]%}%n@%m %#%{$reset_color%} '
+PROMPT='[%{$fg_bold[cyan]%}INS%{$reset_color%}]${WINDOW:+"[$WINDOW]"}%{$fg[green]%}%n@%m %#%{$reset_color%} '
 RPROMPT='%{$fg[yellow]%}[%~]%{$reset_color%}'
+
+function zle-line-init zle-keymap-select {
+	case $KEYMAP in 
+		vicmd)
+		PROMPT='[%{$fg_bold[red]%}NOR%{$reset_color%}]${WINDOW:+"[$WINDOW]"}%{$fg[green]%}%n@%m %#%{$reset_color%} '
+		;;
+		main|viins)
+		PROMPT='[%{$fg_bold[cyan]%}INS%{$reset_color%}]${WINDOW:+"[$WINDOW]"}%{$fg[green]%}%n@%m %#%{$reset_color%} '
+		;;
+	esac
+	zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
 
 # Change the window title of X terminals 
 case ${TERM} in
