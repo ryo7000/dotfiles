@@ -207,7 +207,7 @@ unsetopt promptcr
 # timeの表示をbashっぽくする
 export TIMEFMT=$'%J : \n real\t%*Es\n user\t%*Us\n sys \t%*Ss\n cpu \t%P'
 
-export SVN_EDITOR="vim"
+export EDITOR="vim"
 export PATH=$HOME/bin:$PATH
 
 # colors for ls, etc.
