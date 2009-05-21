@@ -156,7 +156,8 @@ case ${UID} in
 		PROMPT='${WINDOW:+"[$WINDOW]"}%{$fg[green]%}%n@%m %#%{$reset_color%} '
 		;;
 esac
-RPROMPT='%{$fg[yellow]%}[%~]%{$reset_color%}'
+RPROMPT_DEFAULT='%{$fg[yellow]%}[%~]%{$reset_color%}'
+RPROMPT=$RPROMPT_DEFAULT
 
 # Change the window title of X terminals 
 case ${TERM} in
@@ -226,6 +227,22 @@ alias google="w3m www.google.co.jp"
 # unixtime to localtime
 alias -g TIME="| awk '{print strftime(\"%Y-%m-%d %H:%M:%S\",\$1)}'"
 alias -g UTIME="| awk '{print strftime(\"%Y-%m-%d %H:%M:%S %Z\",\$1,1)}'"  # UTC (from awk 3.1.6)
+
+# for git
+typeset -ga chpwd_functions
+typeset -ga preexec_functions
+functions _set_rprompt_git() {
+  local -A git_res
+  git_res=`/usr/bin/git branch -a --no-color 2> /dev/null `
+  if [ $? != '0' ]; then
+    RPROMPT=$RPROMPT_DEFAULT
+  else
+    git_res=`echo $git_res|grep '^*'|tr -d '\* '`
+    RPROMPT=$RPROMPT_DEFAULT' ('$git_res')'
+  fi
+}
+chpwd_functions+=_set_rprompt_git
+preexec_functions+=_set_rprompt_git
 
 # local設定の読み込み
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
