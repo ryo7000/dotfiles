@@ -22,8 +22,8 @@ bindkey '^N' history-beginning-search-forward-end
 bindkey '^[[A' history-beginning-search-backward-end # ↑キー
 bindkey '^[[B' history-beginning-search-forward-end  # ↓キー
 
-# Ctrl-rでインクリメンタルサーチ
-bindkey '^R' history-incremental-search-backward
+# Ctrl-rでインクリメンタルサーチ (*等でAnd検索可能に)
+bindkey '^R' history-incremental-pattern-search-backward
 
 # Ctrl-eで、過去の最後の引数を挿入
 bindkey '^E' insert-last-word
