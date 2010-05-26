@@ -15,3 +15,5 @@ term xterm-256color
 
 defencoding utf-8
 encoding utf-8
+
+defscrollback 10000
