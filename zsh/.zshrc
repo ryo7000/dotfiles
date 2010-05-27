@@ -224,6 +224,7 @@ alias cp="cp -i"
 alias rm="rm -i"
 alias mv="mv -i"
 alias google="w3m www.google.co.jp"
+alias nvim="vim --cmd \"silent noautocmd e\""
 
 # unixtime to localtime
 alias -g TIME="| awk '{print strftime(\"%Y-%m-%d %H:%M:%S\",\$1)}'"
