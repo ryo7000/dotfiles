@@ -205,6 +205,14 @@ unsetopt promptcr
 # 環境変数
 # --------------------------------------------------------------------------------
 
+## import from Gentoo .bashrc
+# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
+if [[ -f ~/.dir_colors ]] ; then
+	eval $(dircolors -b ~/.dir_colors)
+elif [[ -f /etc/DIR_COLORS ]] ; then
+	eval $(dircolors -b /etc/DIR_COLORS)
+fi
+
 # timeの表示をbashっぽくする
 export TIMEFMT=$'%J : \n real\t%*Es\n user\t%*Us\n sys \t%*Ss\n cpu \t%P'
 
