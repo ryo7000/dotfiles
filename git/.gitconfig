@@ -9,6 +9,7 @@
 	co = checkout
 	st = status
 	dix = diff --cached
+	logx = log --pretty=format:\"%Cgreen%h %cd %Cblue%cn %Creset%s\" --graph --date=short
 [color]
 	diff = auto
 	status = auto
