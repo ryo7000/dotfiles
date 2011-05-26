@@ -221,7 +221,7 @@ export TIMEFMT=$'%J : \n real\t%*Es\n user\t%*Us\n sys \t%*Ss\n cpu \t%P'
 
 export EDITOR="vim"
 export PATH=$HOME/bin:$PATH
-export RUBYOPT="$RUBYOPT -Ku"
+#export RUBYOPT="$RUBYOPT -Ku"
 
 # 重複したPATHを削除
 typeset -U path
