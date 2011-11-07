@@ -238,8 +238,10 @@ alias google="w3m www.google.co.jp"
 alias nvim="vim --cmd \"silent noautocmd e\""
 
 # unixtime to localtime
-alias -g TIME="| awk '{print strftime(\"%Y-%m-%d %H:%M:%S\",\$1)}'"
-alias -g UTIME="| awk '{print strftime(\"%Y-%m-%d %H:%M:%S %Z\",\$1,1)}'"  # UTC (from awk 3.1.6)
+ut2date () {
+	date -d "@${1}" +"%Y-%m-%d %H:%M:%S %Z"
+	date -u -d "@${1}" +"%Y-%m-%d %H:%M:%S %Z"
+}
 
 # for scm
 autoload -Uz vcs_info
