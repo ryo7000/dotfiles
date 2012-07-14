@@ -236,6 +236,7 @@ alias rm="rm -i"
 alias mv="mv -i"
 alias google="w3m www.google.co.jp"
 alias nvim="vim --cmd \"silent noautocmd e\""
+alias tmux="tmux -2"
 
 # unixtime to localtime
 ut2date () {
