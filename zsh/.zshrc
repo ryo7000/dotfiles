@@ -235,7 +235,7 @@ alias cp="cp -i"
 alias rm="rm -i"
 alias mv="mv -i"
 alias google="w3m www.google.co.jp"
-alias nvim="vim --cmd \"silent noautocmd e\""
+alias nvim="vim --cmd \"set ei=FileType\""
 alias tmux="tmux -2"
 
 # unixtime to localtime
