@@ -1,17 +1,18 @@
 [user]
-	name = ryo
-	email = ryo@live-emotion.com
+    name = ryo
+    email = ryo@live-emotion.com
 [core]
-	excludesfile = /home/ryo/.gitignore
+    excludesfile = /home/ryo/.gitignore
 [alias]
     di = diff
-	ci = commit
-	co = checkout
-	st = status
-	dix = diff --cached
-	logx = log --pretty=format:\"%Cgreen%h %cd %Cblue%cn %Cred%d %Creset%s\" --graph --date=short --full-history --all
+    ci = commit
+    co = checkout
+    st = status
+    dix = diff --cached
+    logx = log --pretty=format:\"%Cgreen%h %cd %Cblue%cn %Cred%d %Creset%s\" --graph --date=short --full-history --all
+    mg = merge --no-ff
 [color]
-	diff = auto
-	status = auto
-	branch = auto
-	interactive = auto
+    diff = auto
+    status = auto
+    branch = auto
+    interactive = auto
