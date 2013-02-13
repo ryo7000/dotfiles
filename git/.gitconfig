@@ -16,7 +16,14 @@
     status = auto
     branch = auto
     interactive = auto
+
+# カレントブランチと同名のリモートブランチが存在する場合のみ
+# カレントブランチのpushが行われる
 [push]
     default = simple
+
+# master上でgit mergeする時は常に--no-ff (Merge commitを作成)
+# git pullする時はmergeではなくrebase
 [branch "master"]
     mergeoptions = --no-ff
+    rebase = true
