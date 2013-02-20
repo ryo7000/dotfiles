@@ -1,8 +1,11 @@
 begin
   require 'hirb'
+  require 'awesome_print'
 rescue LoadError
   # Missing goodies, bummer
 end
+
+Pry.print = proc{|output, value| output.puts value.ai }
 
 if defined? Hirb
   # Slightly dirty hack to fully support in-session Hirb.disable/enable toggling
