@@ -5,7 +5,9 @@ rescue LoadError
   # Missing goodies, bummer
 end
 
-Pry.print = proc{|output, value| output.puts value.ai }
+if defined? AwesomePrint
+  Pry.print = proc{|output, value| output.puts value.ai }
+end
 
 if defined? Hirb
   # Slightly dirty hack to fully support in-session Hirb.disable/enable toggling
