@@ -37,3 +37,8 @@ URxvt*color15: #EEEEEC
 URxvt*urlLauncher:firefox
 URxvt*matcher*button: 1
 URxvt*perl-ext-common: default,matcher
+
+URxvt*iso14755: False
+URxvt*iso14755_52: False
+URxvt*keysym.C-Tab: \033[27;5;9~
+URxvt*keysym.C-S-Tab: \033[27;6;9~
