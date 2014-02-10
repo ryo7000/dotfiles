@@ -1,15 +1,12 @@
 begin
-  require 'hirb'
   require 'awesome_print'
+  AwesomePrint.pry!
 rescue LoadError
-  # Missing goodies, bummer
 end
 
-if defined? AwesomePrint
-  Pry.print = proc{|output, value| output.puts value.ai }
-end
+begin
+  require 'hirb'
 
-if defined? Hirb
   # Slightly dirty hack to fully support in-session Hirb.disable/enable toggling
   Hirb::View.instance_eval do
     def enable_output_method
@@ -27,4 +24,5 @@ if defined? Hirb
   end
 
   Hirb.enable
+rescue LoadError
 end
