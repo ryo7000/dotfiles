@@ -27,3 +27,6 @@
 [branch "master"]
     mergeoptions = --no-ff
     rebase = true
+
+[url "https://"]
+	insteadOf = git://
