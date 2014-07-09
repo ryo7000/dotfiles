@@ -61,15 +61,15 @@ setopt magic_equal_subst
 zstyle ':completion:*:default' menu select=1
 
 # Termに表示されている内容から補完
-# from http://d.hatena.ne.jp/secondlife/20060108/1136650653
-HARDCOPYFILE=$HOME/.screen-hardcopy
+# from http://qiita.com/hamaco/items/4eb19da6cf216104adf0
+HARDCOPYFILE=$HOME/.tmux-hardcopy
 touch $HARDCOPYFILE
 
 dabbrev-complete () {
         local reply lines=80 # 80行分
-        screen -X eval "hardcopy -h $HARDCOPYFILE"
+        tmux capture-pane && tmux save-buffer -b 0 $HARDCOPYFILE && tmux delete-buffer -b 0
         reply=($(sed '/^$/d' $HARDCOPYFILE | sed '$ d' | tail -$lines))
-        compadd - "${reply[@]%[*/=@|]}"
+        compadd -Q - "${reply[@]%[*/=@|]}"
 }
 
 zle -C dabbrev-complete menu-complete dabbrev-complete
