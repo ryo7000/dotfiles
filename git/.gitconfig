@@ -28,8 +28,5 @@
     mergeoptions = --no-ff
     rebase = true
 
-[url "https://"]
-	insteadOf = git://
-
 [include]
 	path = .gitconfig.local
