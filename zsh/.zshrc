@@ -22,11 +22,21 @@ bindkey '^N' history-beginning-search-forward-end
 bindkey '^[[A' history-beginning-search-backward-end # ↑キー
 bindkey '^[[B' history-beginning-search-forward-end  # ↓キー
 
-# Ctrl-rでインクリメンタルサーチ (*等でAnd検索可能に)
-bindkey '^R' history-incremental-pattern-search-backward
-
 # Ctrl-eで、過去の最後の引数を挿入
 bindkey '^E' insert-last-word
+
+if which peco > /dev/null; then
+    # pecoでcdrを使う
+    zle -N peco-cdr
+    bindkey '^@' peco-cdr
+
+    # search with peco
+    zle -N peco-select-history
+    bindkey '^R' peco-select-history
+else
+    # Ctrl-rでインクリメンタルサーチ (*等でAnd検索可能に)
+    bindkey '^R' history-incremental-pattern-search-backward
+fi
 
 # --------------------------------------------------------------------------------
 # 補完設定
@@ -104,6 +114,20 @@ HISTFILE=$HOME/.zsh-history
 HISTSIZE=100000
 SAVEHIST=100000
 
+function peco-select-history() {
+    local tac
+    if which tac > /dev/null; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(history -n 1 | \
+        eval $tac | \
+        peco --query "$LBUFFER" | sed 's@\\n@\n@g' )
+    CURSOR=$#BUFFER
+    zle clear-screen
+}
+
 # --------------------------------------------------------------------------------
 # cd設定
 # --------------------------------------------------------------------------------
@@ -125,6 +149,15 @@ if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]
     zstyle ':chpwd:*' recent-dirs-default true
     zstyle ':completion:*' recent-dirs-insert both
 fi
+
+function peco-cdr () {
+    local selected_dir=$(cdr -l | awk '{ print $2 }' | peco)
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
 
 # --------------------------------------------------------------------------------
 # 展開関連設定
