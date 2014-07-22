@@ -28,7 +28,7 @@ bindkey '^E' insert-last-word
 if which peco > /dev/null; then
     # pecoでcdrを使う
     zle -N peco-cdr
-    bindkey '^@' peco-cdr
+    bindkey '^J' peco-cdr
 
     # search with peco
     zle -N peco-select-history
