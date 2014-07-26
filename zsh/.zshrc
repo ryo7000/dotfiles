@@ -5,6 +5,27 @@
 # http://zshwiki.org/home/
 
 # --------------------------------------------------------------------------------
+# 環境変数
+# --------------------------------------------------------------------------------
+
+## import from Gentoo .bashrc
+# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
+if [[ -f ~/.dir_colors ]] ; then
+	eval $(dircolors -b ~/.dir_colors)
+elif [[ -f /etc/DIR_COLORS ]] ; then
+	eval $(dircolors -b /etc/DIR_COLORS)
+fi
+
+# timeの表示をbashっぽくする
+export TIMEFMT=$'%J : \n real\t%*Es\n user\t%*Us\n sys \t%*Ss\n cpu \t%P'
+
+export EDITOR="vim"
+export PATH=$HOME/bin:$PATH
+
+# 重複したPATHを削除
+typeset -U path
+
+# --------------------------------------------------------------------------------
 # キー設定
 # --------------------------------------------------------------------------------
 
@@ -246,27 +267,6 @@ setopt print_eightbit
 # 文字列末尾に改行コードが無い場合でも表示する
 unsetopt promptcr
 
-# --------------------------------------------------------------------------------
-# 環境変数
-# --------------------------------------------------------------------------------
-
-## import from Gentoo .bashrc
-# Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
-if [[ -f ~/.dir_colors ]] ; then
-	eval $(dircolors -b ~/.dir_colors)
-elif [[ -f /etc/DIR_COLORS ]] ; then
-	eval $(dircolors -b /etc/DIR_COLORS)
-fi
-
-# timeの表示をbashっぽくする
-export TIMEFMT=$'%J : \n real\t%*Es\n user\t%*Us\n sys \t%*Ss\n cpu \t%P'
-
-export EDITOR="vim"
-export PATH=$HOME/bin:$PATH
-#export RUBYOPT="$RUBYOPT -Ku"
-
-# 重複したPATHを削除
-typeset -U path
 
 # colors for ls, etc.
 alias d="ls --color"
