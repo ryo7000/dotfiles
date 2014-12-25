@@ -297,5 +297,10 @@ precmd () {
 }
 RPROMPT="$RPROMPT_DEFAULT %1(v|%F{green}%1v%f|)"
 
+# for direnv
+if builtin command -v direnv > /dev/null ; then
+    eval "$(direnv hook zsh)"
+fi
+
 # local設定の読み込み
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
