@@ -304,3 +304,6 @@ fi
 
 # local設定の読み込み
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
+
+# 重複したPATHを削除
+typeset -U path
