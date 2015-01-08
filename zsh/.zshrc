@@ -154,7 +154,7 @@ function peco-select-history() {
 }
 
 function peco-select-git() {
-    local SELECTED_FILE_TO_ADD="$(git status --porcelain | \
+    local SELECTED_FILE_TO_ADD="$(git status --short | \
                                   peco | awk '{print $2}' | tr '\n' ' ')"
     if [ -n "$SELECTED_FILE_TO_ADD" ]; then
       BUFFER="${LBUFFER} ${SELECTED_FILE_TO_ADD}"
