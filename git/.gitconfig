@@ -3,6 +3,9 @@
     email = ryo@live-emotion.com
 [core]
     excludesfile = /home/ryo/.gitignore
+
+    # Add FRX (git default) option if $LESS does not include FRX.
+    pager = less -FRX
 [alias]
     di = diff
     ci = commit
