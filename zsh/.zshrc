@@ -54,6 +54,10 @@ if which peco > /dev/null; then
     # search with peco
     zle -N peco-select-history
     bindkey '^R' peco-select-history
+
+    # git files with peco
+    zle -N peco-select-git
+    bindkey "^g" peco-select-git
 else
     # Ctrl-rでインクリメンタルサーチ (*等でAnd検索可能に)
     bindkey '^R' history-incremental-pattern-search-backward
@@ -146,6 +150,16 @@ function peco-select-history() {
         eval $tac | \
         peco --query "$LBUFFER" | sed 's@\\n@\n@g' )
     CURSOR=$#BUFFER
+    zle clear-screen
+}
+
+function peco-select-git() {
+    local SELECTED_FILE_TO_ADD="$(git status --porcelain | \
+                                  peco | awk '{print $2}' | tr '\n' ' ')"
+    if [ -n "$SELECTED_FILE_TO_ADD" ]; then
+      BUFFER="${LBUFFER} ${SELECTED_FILE_TO_ADD}"
+      CURSOR=$#BUFFER
+    fi
     zle clear-screen
 }
 
