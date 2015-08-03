@@ -148,6 +148,7 @@ function peco-select-history() {
     fi
     BUFFER=$(history -n 1 | \
         eval $tac | \
+        awk '!a[$0]++' | \
         peco --query "$LBUFFER" | sed 's@\\n@\n@g' )
     CURSOR=$#BUFFER
     zle clear-screen
