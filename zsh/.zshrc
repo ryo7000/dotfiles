@@ -149,14 +149,14 @@ function peco-select-history() {
     BUFFER=$(history -n 1 | \
         eval $tac | \
         awk '!a[$0]++' | \
-        peco --query "$LBUFFER" | sed 's@\\n@\n@g' )
+        peco --query "$LBUFFER" --prompt "HISTORY>" | sed 's@\\n@\n@g' )
     CURSOR=$#BUFFER
     zle clear-screen
 }
 
 function peco-select-git() {
     local SELECTED_FILE_TO_ADD="$(git status --short | \
-                                  peco | awk '{print $2}' | tr '\n' ' ')"
+                                  peco --prompt "GIT>" | awk '{print $2}' | tr '\n' ' ')"
     if [ -n "$SELECTED_FILE_TO_ADD" ]; then
       BUFFER="${LBUFFER} ${SELECTED_FILE_TO_ADD}"
       CURSOR=$#BUFFER
@@ -187,7 +187,7 @@ if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]
 fi
 
 function peco-cdr () {
-    local selected_dir=$(cdr -l | awk '{ print $2 }' | peco)
+    local selected_dir=$(cdr -l | awk '{ print $2 }' | peco --prompt "DIR>")
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
         zle accept-line
