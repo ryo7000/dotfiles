@@ -158,7 +158,7 @@ function peco-select-git() {
     local SELECTED_FILE_TO_ADD="$(git status --short | \
                                   peco --prompt "GIT>" | awk '{print $2}' | tr '\n' ' ')"
     if [ -n "$SELECTED_FILE_TO_ADD" ]; then
-      BUFFER="${LBUFFER} ${SELECTED_FILE_TO_ADD}"
+      BUFFER="${LBUFFER}${SELECTED_FILE_TO_ADD}"
       CURSOR=$#BUFFER
     fi
     zle clear-screen
