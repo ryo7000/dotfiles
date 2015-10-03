@@ -187,7 +187,7 @@ if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]
 fi
 
 function peco-cdr () {
-    local selected_dir=$(cdr -l | awk '{ print $2 }' | peco --prompt "DIR>")
+    local selected_dir="$(cdr -l | sed -e 's/^[[:digit:]]*[[:blank:]]*//' | peco --prompt "DIR>")"
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
         zle accept-line
