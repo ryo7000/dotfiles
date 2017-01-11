@@ -151,7 +151,6 @@ function peco-select-history() {
         awk '!a[$0]++' | \
         peco --query "$LBUFFER" --prompt "HISTORY>" | sed 's@\\n@\n@g' )
     CURSOR=$#BUFFER
-    zle clear-screen
 }
 
 function peco-select-git() {
@@ -161,7 +160,6 @@ function peco-select-git() {
       BUFFER="${LBUFFER}${SELECTED_FILE_TO_ADD}"
       CURSOR=$#BUFFER
     fi
-    zle clear-screen
 }
 
 # --------------------------------------------------------------------------------
