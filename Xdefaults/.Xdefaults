@@ -34,7 +34,7 @@ URxvt*color13: #AD7FA8
 URxvt*color14: #34E2E2
 URxvt*color15: #EEEEEC
 
-URxvt*urlLauncher:firefox
+URxvt*url-launcher: xdg-open
 URxvt*matcher*button: 1
 URxvt*perl-ext-common: default,matcher
 
