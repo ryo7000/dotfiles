@@ -8,9 +8,8 @@ URxvt*preeditType: OverTheSpot
 #URxvt*imFont: -misc-fixed-medium-r-normal--18-120-100-100-c-90-iso10646-1
 #URxvt*preeditType: OverTheSpot
 URxvt*saveline: 20000
-#URxvt*font: xft:MigMix 1M:size=13:antialias=true:hinting=true,mplus_f10r
-URxvt*font: xft:MigMix 1M:size=13:antialias=true:hinting=true,fixed
-URxvt*boldFont: xft:MigMix 1M:bold:size=13:antialias=true:hinting=true
+URxvt*font: xft:Ricty for Powerline:style=RegularForPowerline:size=13:antialias=true:hinting=true,fixed
+URxvt*boldFont: xft:Ricty for Powerline:style=BoldForPowerline:bold:size=13:antialias=true:hinting=true
 URxvt*foreground: snow
 URxvt*depth: 32
 URxvt*background: rgba:1111/1111/1111/dddd
