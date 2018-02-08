@@ -58,6 +58,9 @@ if which peco > /dev/null; then
     # git files with peco
     zle -N peco-select-git
     bindkey "^g" peco-select-git
+
+    zle -N peco-select-find
+    bindkey "^f" peco-select-find
 else
     # Ctrl-rでインクリメンタルサーチ (*等でAnd検索可能に)
     bindkey '^R' history-incremental-pattern-search-backward
@@ -158,6 +161,14 @@ function peco-select-git() {
                                   peco --prompt "GIT>" | awk '{print $2}' | tr '\n' ' ')"
     if [ -n "$SELECTED_FILE_TO_ADD" ]; then
       BUFFER="${LBUFFER}${SELECTED_FILE_TO_ADD}"
+      CURSOR=$#BUFFER
+    fi
+}
+
+function peco-select-find() {
+    local file="$(find . | peco --prompt "FILE>")"
+    if [ -n "$file" ]; then
+      BUFFER="${LBUFFER}${file}"
       CURSOR=$#BUFFER
     fi
 }
