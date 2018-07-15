@@ -6,6 +6,7 @@
 
     # Add FRX (git default) option if $LESS does not include FRX.
     pager = less -FRX
+    autoCRLF = false
 [alias]
     br = branch
     di = diff
