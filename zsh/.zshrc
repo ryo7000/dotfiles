@@ -61,6 +61,9 @@ if which peco > /dev/null; then
 
     zle -N peco-select-find
     bindkey "^f" peco-select-find
+
+    zle -N peco-ghq-src
+    bindkey "^]" peco-ghq-src
 else
     # Ctrl-rでインクリメンタルサーチ (*等でAnd検索可能に)
     bindkey '^R' history-incremental-pattern-search-backward
@@ -171,6 +174,15 @@ function peco-select-find() {
       BUFFER="${LBUFFER}${file}"
       CURSOR=$#BUFFER
     fi
+}
+
+function peco-ghq-src() {
+    local src=$(ghq list --full-path | peco --query "$LBUFFER")
+    if [ -n "$src" ]; then
+        BUFFER="cd $src"
+        zle accept-line
+    fi
+    zle -R -c
 }
 
 # --------------------------------------------------------------------------------
