@@ -121,8 +121,8 @@ bindkey '^o^_' reverse-menu-complete
 # hisotry設定
 # --------------------------------------------------------------------------------
 
-# 複数の zsh を同時に使う時など history ファイルに上書きせず追加する
-setopt append_history
+# history ファイルに上書きせず、コマンドの終了を待たずに追加する
+setopt inc_append_history
 
 # 直前と同じコマンドラインはヒストリに追加しない
 setopt hist_ignore_dups
