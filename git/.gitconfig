@@ -34,3 +34,5 @@
 	path = .gitconfig.local
 [merge]
 	ff = false
+[log]
+	decorate = auto
