@@ -46,24 +46,26 @@ bindkey '^[[B' history-beginning-search-forward-end  # ↓キー
 # Ctrl-eで、過去の最後の引数を挿入
 bindkey '^E' insert-last-word
 
-if which peco > /dev/null; then
-    # pecoでcdrを使う
-    zle -N peco-cdr
-    bindkey '^J' peco-cdr
+export FZF_DEFAULT_OPTS='--height 80% --reverse --border --no-sort --exact'
 
-    # search with peco
-    zle -N peco-select-history
-    bindkey '^R' peco-select-history
+if which fzf > /dev/null; then
+    # fzfでcdrを使う
+    zle -N fzf-cdr
+    bindkey '^J' fzf-cdr
 
-    # git files with peco
-    zle -N peco-select-git
-    bindkey "^g" peco-select-git
+    # search with fzf
+    zle -N fzf-select-history
+    bindkey '^R' fzf-select-history
 
-    zle -N peco-select-find
-    bindkey "^f" peco-select-find
+    # git files with fzf
+    zle -N fzf-select-git
+    bindkey "^g" fzf-select-git
 
-    zle -N peco-ghq-src
-    bindkey "^]" peco-ghq-src
+    zle -N fzf-select-find
+    bindkey "^f" fzf-select-find
+
+    zle -N fzf-ghq-src
+    bindkey "^]" fzf-ghq-src
 else
     # Ctrl-rでインクリメンタルサーチ (*等でAnd検索可能に)
     bindkey '^R' history-incremental-pattern-search-backward
@@ -145,7 +147,7 @@ HISTFILE=$HOME/.zsh-history
 HISTSIZE=100000
 SAVEHIST=100000
 
-function peco-select-history() {
+function fzf-select-history() {
     local tac
     if which tac > /dev/null; then
         tac="tac"
@@ -155,29 +157,29 @@ function peco-select-history() {
     BUFFER=$(history -n 1 | \
         eval $tac | \
         awk '!a[$0]++' | \
-        peco --query "$LBUFFER" --prompt "HISTORY>" | sed 's@\\n@\n@g' )
+        fzf --query "$LBUFFER" --prompt "HISTORY>" | sed 's@\\n@\n@g' )
     CURSOR=$#BUFFER
 }
 
-function peco-select-git() {
+function fzf-select-git() {
     local SELECTED_FILE_TO_ADD="$(git status --short | \
-                                  peco --prompt "GIT>" | awk '{print $2}' | tr '\n' ' ')"
+                                  fzf --prompt "GIT>" | awk '{print $2}' | tr '\n' ' ')"
     if [ -n "$SELECTED_FILE_TO_ADD" ]; then
       BUFFER="${LBUFFER}${SELECTED_FILE_TO_ADD}"
       CURSOR=$#BUFFER
     fi
 }
 
-function peco-select-find() {
-    local file="$(find . | peco --prompt "FILE>")"
+function fzf-select-find() {
+    local file="$(find . | fzf --prompt "FILE>")"
     if [ -n "$file" ]; then
       BUFFER="${LBUFFER}${file}"
       CURSOR=$#BUFFER
     fi
 }
 
-function peco-ghq-src() {
-    local src=$(ghq list --full-path | peco --query "$LBUFFER")
+function fzf-ghq-src() {
+    local src=$(ghq list --full-path | fzf --query "$LBUFFER")
     if [ -n "$src" ]; then
         BUFFER="cd $src"
         zle accept-line
@@ -207,8 +209,8 @@ if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]
     zstyle ':completion:*' recent-dirs-insert both
 fi
 
-function peco-cdr () {
-    local selected_dir="$(cdr -l | sed -e 's/^[[:digit:]]*[[:blank:]]*//' | peco --prompt "DIR>")"
+function fzf-cdr () {
+    local selected_dir="$(cdr -l | sed -e 's/^[[:digit:]]*[[:blank:]]*//' | fzf --prompt "DIR>")"
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
         zle accept-line
