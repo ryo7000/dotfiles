@@ -14,7 +14,7 @@
     co = checkout
     st = status
     dc = diff --cached
-    logx = log --pretty=format:\"%Cgreen%h %ad %Cblue%cn %Cred%d %Creset%s\" --graph --date=short --full-history --all
+    logx = log --pretty=format:\"%Cgreen%h %ad %Cblue%cn %Cred%d %Creset%s\" --graph --date=short --full-history --branches
     mg = merge --no-ff
 [color]
     ui = true
