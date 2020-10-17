@@ -36,3 +36,7 @@
 	ff = false
 [log]
 	decorate = auto
+[url "github.com:ryo7000"]
+    insteadOf = https://github.com/ryo7000
+[ghq]
+    root = ~/devel/src
