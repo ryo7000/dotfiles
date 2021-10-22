@@ -39,6 +39,10 @@
 [url "github.com:ryo7000"]
     insteadOf = https://github.com/ryo7000
 [ghq]
-    root = ~/devel/src
+    root = ~/devel/ghq
 [init]
 	defaultBranch = main
+[includeIf "gitdir:~/dotfiles/"]
+    path = ~/.gitconfig-priv
+[includeIf "gitdir:~/devel/ghq/"]
+    path = ~/.gitconfig-priv
