@@ -340,8 +340,17 @@ if builtin command -v direnv > /dev/null ; then
     eval "$(direnv hook zsh)"
 fi
 
+# Go
+if [[ -d /usr/local/go/bin ]]; then
+    export PATH=$PATH:/usr/local/go/bin
+    export GOPATH="$HOME/devel/go"
+fi
+
+# Rust
+[[ -f $HOME/.cargo/env ]] && source $HOME/.cargo/env
+
 # local設定の読み込み
-[ -f ~/.zshrc.local ] && source ~/.zshrc.local
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # 重複したPATHを削除
 typeset -U path
