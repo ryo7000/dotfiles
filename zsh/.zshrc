@@ -342,8 +342,8 @@ fi
 
 # Go
 if [[ -d /usr/local/go/bin ]]; then
-    export PATH=/usr/local/go/bin:$PATH
     export GOPATH="$HOME/devel/go"
+    export PATH=/usr/local/go/bin:$GOPATH/bin:$PATH
 fi
 
 # Rust
