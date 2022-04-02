@@ -1,0 +1,105 @@
+# cdr
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+zstyle ':chpwd:*' recent-dirs-max 500
+zstyle ':chpwd:*' recent-dirs-default true
+zstyle ':completion:*' recent-dirs-insert both
+
+# fzf
+export FZF_DEFAULT_OPTS='--height 80% --reverse --border --no-sort --exact'
+
+function fzf-cdr () {
+    local selected_dir="$(cdr -l | sed -e 's/^[[:digit:]]*[[:blank:]]*//' | fzf --prompt "DIR>")"
+    if [ -n "$selected_dir" ]; then
+        BUFFER="cd ${selected_dir}"
+        zle accept-line
+    fi
+    zle clear-screen
+}
+
+function fzf-select-history() {
+    local tac
+    if builtin command -v tac > /dev/null ; then
+        tac="tac"
+    else
+        tac="tail -r"
+    fi
+    BUFFER=$(history -n 1 | \
+        eval $tac | \
+        awk '!a[$0]++' | \
+        fzf --query "$LBUFFER" --prompt "HISTORY>" | sed 's@\\n@\n@g' )
+    CURSOR=$#BUFFER
+}
+
+function fzf-select-git() {
+    local SELECTED_FILE_TO_ADD="$(git status --short | \
+                                  fzf --prompt "GIT>" | awk '{print $2}' | tr '\n' ' ')"
+    if [ -n "$SELECTED_FILE_TO_ADD" ]; then
+      BUFFER="${LBUFFER}${SELECTED_FILE_TO_ADD}"
+      CURSOR=$#BUFFER
+    fi
+}
+
+function fzf-select-find() {
+    local file="$(find . | fzf --prompt "FILE>")"
+    if [ -n "$file" ]; then
+      BUFFER="${LBUFFER}${file}"
+      CURSOR=$#BUFFER
+    fi
+}
+
+function fzf-ghq-src() {
+    local src=$(ghq list --full-path | fzf --query "$LBUFFER")
+    if [ -n "$src" ]; then
+        BUFFER="cd $src"
+        zle accept-line
+    fi
+    zle -R -c
+}
+
+if builtin command -v fzf > /dev/null; then
+    # fzfでcdrを使う
+    zle -N fzf-cdr
+    bindkey '^J' fzf-cdr
+
+    # search with fzf
+    zle -N fzf-select-history
+    bindkey '^R' fzf-select-history
+
+    # git files with fzf
+    zle -N fzf-select-git
+    bindkey "^g" fzf-select-git
+
+    zle -N fzf-select-find
+    bindkey "^k" fzf-select-find
+
+    zle -N fzf-ghq-src
+    bindkey "^]" fzf-ghq-src
+else
+    # Ctrl-rでインクリメンタルサーチ (*等でAnd検索可能に)
+    bindkey '^R' history-incremental-pattern-search-backward
+fi
+
+# unixtime to localtime
+function ut2date () {
+  date -d "@${1}" +"%Y-%m-%d %H:%M:%S %Z"
+  date -u -d "@${1}" +"%Y-%m-%d %H:%M:%S %Z"
+}
+
+# asdf
+[[ -f $HOME/.asdf/asdf.sh ]] && source $HOME/.asdf/asdf.sh
+
+# direnv
+if builtin command -v direnv > /dev/null ; then
+    eval "$(direnv hook zsh)"
+fi
+
+# Go
+if builtin command -v go > /dev/null ; then
+    export GOPATH="$HOME/devel/go"
+    path+=($GOPATH/bin)
+    export PATH
+fi
+
+# Rust
+[[ -f $HOME/.cargo/env ]] && source $HOME/.cargo/env

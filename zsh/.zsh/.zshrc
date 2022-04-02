@@ -1,348 +1,140 @@
-# 参考ページ
-# http://d.hatena.ne.jp/cooldaemon/searchdiary?word=*%5Bzsh%5D
-# http://hatena.g.hatena.ne.jp/hatenatech/20060517/1147833430
-# http://www.ayu.ics.keio.ac.jp/~mukai/translate/zshoptions.html
-# http://zshwiki.org/home/
+# Start configuration added by Zim install {{{
+#
+# User configuration sourced by interactive shells
+#
 
-# --------------------------------------------------------------------------------
-# 環境変数
-# --------------------------------------------------------------------------------
+# -----------------
+# Zsh configuration
+# -----------------
 
-# timeの表示をbashっぽくする
-export TIMEFMT=$'%J : \n real\t%*Es\n user\t%*Us\n sys \t%*Ss\n cpu \t%P'
+#
+# History
+#
 
-export EDITOR="vim"
-export PATH=$HOME/bin:$PATH
+# Remove older command from the history if a duplicate is to be added.
+setopt HIST_IGNORE_ALL_DUPS
 
-# 重複したPATHを削除
-typeset -U path
+#
+# Input/output
+#
 
-# --------------------------------------------------------------------------------
-# キー設定
-# --------------------------------------------------------------------------------
-
-# vi編集モード
+# Set editor default keymap to emacs (`-e`) or vi (`-v`)
 bindkey -v
 
-# 履歴表示の後、カーソルを末尾に
-autoload history-search-end
-zle -N history-beginning-search-backward-end history-search-end
-zle -N history-beginning-search-forward-end history-search-end
+# Prompt for spelling correction of commands.
+#setopt CORRECT
 
-# Ctrl-p, n, ↑, ↓で前方一致検索
-bindkey '^P' history-beginning-search-backward-end
-bindkey '^N' history-beginning-search-forward-end
-bindkey '^[[A' history-beginning-search-backward-end # ↑キー
-bindkey '^[[B' history-beginning-search-forward-end  # ↓キー
+# Customize spelling correction prompt.
+#SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 
-# Ctrl-eで、過去の最後の引数を挿入
-bindkey '^E' insert-last-word
+# Remove path separator from WORDCHARS.
+WORDCHARS=${WORDCHARS//[\/]}
 
-export FZF_DEFAULT_OPTS='--height 80% --reverse --border --no-sort --exact'
+# -----------------
+# Zim configuration
+# -----------------
 
-if which fzf > /dev/null; then
-    # fzfでcdrを使う
-    zle -N fzf-cdr
-    bindkey '^J' fzf-cdr
+# Use degit instead of git as the default tool to install and update modules.
+#zstyle ':zim:zmodule' use 'degit'
 
-    # search with fzf
-    zle -N fzf-select-history
-    bindkey '^R' fzf-select-history
+# --------------------
+# Module configuration
+# --------------------
 
-    # git files with fzf
-    zle -N fzf-select-git
-    bindkey "^g" fzf-select-git
+#
+# git
+#
 
-    zle -N fzf-select-find
-    bindkey "^f" fzf-select-find
+# Set a custom prefix for the generated aliases. The default prefix is 'G'.
+#zstyle ':zim:git' aliases-prefix 'g'
 
-    zle -N fzf-ghq-src
-    bindkey "^]" fzf-ghq-src
-else
-    # Ctrl-rでインクリメンタルサーチ (*等でAnd検索可能に)
-    bindkey '^R' history-incremental-pattern-search-backward
+#
+# input
+#
+
+# Append `../` to your input for each `.` you type after an initial `..`
+#zstyle ':zim:input' double-dot-expand yes
+
+#
+# termtitle
+#
+
+# Set a custom terminal title format using prompt expansion escape sequences.
+# See http://zsh.sourceforge.net/Doc/Release/Prompt-Expansion.html#Simple-Prompt-Escapes
+# If none is provided, the default '%n@%m: %~' is used.
+#zstyle ':zim:termtitle' format '%1~'
+
+#
+# zsh-autosuggestions
+#
+
+# Disable automatic widget re-binding on each precmd. This can be set when
+# zsh-users/zsh-autosuggestions is the last module in your ~/.zimrc.
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+# Customize the style that the suggestions are shown with.
+# See https://github.com/zsh-users/zsh-autosuggestions/blob/master/README.md#suggestion-highlight-style
+#ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=242'
+
+#
+# zsh-syntax-highlighting
+#
+
+# Set what highlighters will be used.
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
+# Customize the main highlighter styles.
+# See https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters/main.md#how-to-tweak-it
+#typeset -A ZSH_HIGHLIGHT_STYLES
+#ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
+
+# ------------------
+# Initialize modules
+# ------------------
+
+ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
+# Download zimfw plugin manager if missing.
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  if (( ${+commands[curl]} )); then
+    curl -fsSL --create-dirs -o ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  else
+    mkdir -p ${ZIM_HOME} && wget -nv -O ${ZIM_HOME}/zimfw.zsh \
+        https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  fi
 fi
-
-# --------------------------------------------------------------------------------
-# 補完設定
-# --------------------------------------------------------------------------------
-
-# 標準の補完設定
-autoload -U compinit
-compinit
-
-# cache
-zstyle ':completion::complete:*' use-cache 1
-
-# ファイル補完時にも色付け
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-# 補完候補が複数ある時に、一覧表示する
-setopt auto_list
-
-# 補完キー（Tab, Ctrl+I) を連打するだけで順に補完候補を自動で補完する
-setopt auto_menu
-
-# ディレクトリ名の補完で末尾の / を自動的に付加し、次の補完に備える
-setopt auto_param_slash
-
-# auto_list の補完候補一覧で、ls -F のようにファイルの種別をマーク表示
-setopt list_types
-
-# コマンドラインの引数で --prefix=/usr などの = 以降でも補完できる
-setopt magic_equal_subst
-
-# 補完候補を ←↓↑→ で選択 (補完候補が色分け表示される)
-zstyle ':completion:*:default' menu select=1
-
-# Termに表示されている内容から補完
-# from http://qiita.com/hamaco/items/4eb19da6cf216104adf0
-HARDCOPYFILE=$HOME/.tmux-hardcopy
-touch $HARDCOPYFILE
-
-dabbrev-complete () {
-        local reply lines=80 # 80行分
-        tmux capture-pane && tmux save-buffer -b 0 $HARDCOPYFILE && tmux delete-buffer -b 0
-        reply=($(sed '/^$/d' $HARDCOPYFILE | sed '$ d' | tail -$lines))
-        compadd -Q - "${reply[@]%[*/=@|]}"
-}
-
-zle -C dabbrev-complete menu-complete dabbrev-complete
-bindkey '^o' dabbrev-complete
-bindkey '^o^_' reverse-menu-complete
-
-# --------------------------------------------------------------------------------
-# hisotry設定
-# --------------------------------------------------------------------------------
-
-# history ファイルに上書きせず、コマンドの終了を待たずに追加する
-setopt inc_append_history
-
-# 直前と同じコマンドラインはヒストリに追加しない
-setopt hist_ignore_dups
-
-# コマンドラインの先頭がスペースで始まる場合ヒストリに追加しない
-setopt hist_ignore_space
-
-# ヒストリを呼び出してから実行する間に一旦編集できる状態になる
-setopt hist_verify
-
-# シェルのプロセスごとに履歴を共有
-setopt share_history
-
-# history (fc -l) コマンドをヒストリリストから取り除く。
-setopt hist_no_store
-
-# 履歴ファイルに時刻を記録
-setopt extended_history
-HISTFILE=$HOME/.zsh-history
-HISTSIZE=100000
-SAVEHIST=100000
-
-function fzf-select-history() {
-    local tac
-    if which tac > /dev/null; then
-        tac="tac"
-    else
-        tac="tail -r"
-    fi
-    BUFFER=$(history -n 1 | \
-        eval $tac | \
-        awk '!a[$0]++' | \
-        fzf --query "$LBUFFER" --prompt "HISTORY>" | sed 's@\\n@\n@g' )
-    CURSOR=$#BUFFER
-}
-
-function fzf-select-git() {
-    local SELECTED_FILE_TO_ADD="$(git status --short | \
-                                  fzf --prompt "GIT>" | awk '{print $2}' | tr '\n' ' ')"
-    if [ -n "$SELECTED_FILE_TO_ADD" ]; then
-      BUFFER="${LBUFFER}${SELECTED_FILE_TO_ADD}"
-      CURSOR=$#BUFFER
-    fi
-}
-
-function fzf-select-find() {
-    local file="$(find . | fzf --prompt "FILE>")"
-    if [ -n "$file" ]; then
-      BUFFER="${LBUFFER}${file}"
-      CURSOR=$#BUFFER
-    fi
-}
-
-function fzf-ghq-src() {
-    local src=$(ghq list --full-path | fzf --query "$LBUFFER")
-    if [ -n "$src" ]; then
-        BUFFER="cd $src"
-        zle accept-line
-    fi
-    zle -R -c
-}
-
-# --------------------------------------------------------------------------------
-# cd設定
-# --------------------------------------------------------------------------------
-
-# 指定したコマンド名がなく、ディレクトリ名と一致した場合 cd する
-setopt auto_cd
-
-# cdでpushdに置き換え
-setopt autopushd
-
-# 重複ディレクトリはpushdしない
-setopt pushd_ignore_dups
-
-# cd履歴を使うcdrコマンドを有効化
-if [[ -n $(echo ${^fpath}/chpwd_recent_dirs(N)) && -n $(echo ${^fpath}/cdr(N)) ]]; then
-    autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-    add-zsh-hook chpwd chpwd_recent_dirs
-    zstyle ':chpwd:*' recent-dirs-max 500
-    zstyle ':chpwd:*' recent-dirs-default true
-    zstyle ':completion:*' recent-dirs-insert both
+# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  source ${ZIM_HOME}/zimfw.zsh init -q
 fi
+# Initialize modules.
+source ${ZIM_HOME}/init.zsh
 
-function fzf-cdr () {
-    local selected_dir="$(cdr -l | sed -e 's/^[[:digit:]]*[[:blank:]]*//' | fzf --prompt "DIR>")"
-    if [ -n "$selected_dir" ]; then
-        BUFFER="cd ${selected_dir}"
-        zle accept-line
-    fi
-    zle clear-screen
-}
+# ------------------------------
+# Post-init module configuration
+# ------------------------------
 
-# --------------------------------------------------------------------------------
-# 展開関連設定
-# --------------------------------------------------------------------------------
+#
+# zsh-history-substring-search
+#
 
-# {a-c} を a b c に展開する機能を使えるようにする
-setopt brace_ccl
+zmodload -F zsh/terminfo +p:terminfo
+# Bind ^[[A/^[[B manually so up/down works both before and after zle-line-init
+for key ('^[[A' '^P' ${terminfo[kcuu1]}) bindkey ${key} history-substring-search-up
+for key ('^[[B' '^N' ${terminfo[kcud1]}) bindkey ${key} history-substring-search-down
+for key ('k') bindkey -M vicmd ${key} history-substring-search-up
+for key ('j') bindkey -M vicmd ${key} history-substring-search-down
+unset key
+# }}} End configuration added by Zim install
 
-# =command を command のパス名に展開する
-setopt equals
+typeset -U path
 
-# ファイル名で #, ~, ^ の 3 文字を正規表現として扱う
-setopt extended_glob
-
-# ファイル名の展開でディレクトリにマッチした場合末尾に / を付加する
-setopt mark_dirs
-
-# ファイル名の展開で、辞書順ではなく数値的にソートされるようになる
-setopt numeric_glob_sort
-
-# globにマッチしない場合に、標準出力にエラーを表示しない
-setopt nonomatch
-
-# --------------------------------------------------------------------------------
-# prompt設定
-# --------------------------------------------------------------------------------
-
-# コピペの時rpromptを非表示する
-setopt transient_rprompt
-
-# プロンプト文字列で各種展開を行う
-setopt prompt_subst
-
-autoload -U colors; colors
-
-case ${UID} in
-	0)
-		PROMPT='${WINDOW:+"[$WINDOW]"}%{$fg[red]%}%n@%m %#%{$reset_color%} '
-		;;
-	*)
-		PROMPT='${WINDOW:+"[$WINDOW]"}%{$fg[green]%}%n@%m %#%{$reset_color%} '
-		;;
-esac
-RPROMPT_DEFAULT='%{$fg[yellow]%}[%~]%{$reset_color%}'
-RPROMPT=$RPROMPT_DEFAULT
-
-# Change the window title of X terminals 
-case ${TERM} in
-	xterm*|rxvt*|Eterm|aterm|kterm|gnome)
-		PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\007"'
-		;;
-	screen)
-		PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\033\\"'
-		;;
-esac
-
-# --------------------------------------------------------------------------------
-# その他設定
-# --------------------------------------------------------------------------------
-
-# カッコの対応などを自動的に補完する
-setopt auto_param_keys
-
-# ビープ音を鳴らさないようにする
-setopt NO_beep
-
-# コマンドのスペルチェックをする
-setopt correct
-
-# Ctrl+S/Ctrl+Q によるフロー制御を使わないようにする
-setopt no_flow_control
-stty -ixon
-
-# シェルが終了しても裏ジョブに HUP シグナルを送らないようにする
-setopt NO_hup
-
-# コマンドラインでも # 以降をコメントと見なす
-setopt interactive_comments
-
-# 内部コマンド jobs の出力をデフォルトで jobs -l にする
-setopt long_list_jobs
-
-# 8 ビット目を通すようになり、日本語のファイル名などを見れるようになる
-setopt print_eightbit
-
-# 文字列末尾に改行コードが無い場合でも表示する
-unsetopt promptcr
-
-
-# colors for ls, etc.
-alias d="ls --color"
-alias ls="ls --color=auto -F"
-alias ll="ls --color -F -l"
-alias grep='grep --color=auto'
-alias cp="cp -i"
-alias rm="rm -i"
-alias mv="mv -i"
-alias google="w3m www.google.co.jp"
-alias nvim="vim --cmd \"set ei=FileType\""
-alias tmux="tmux -2"
-
-# unixtime to localtime
-ut2date () {
-	date -d "@${1}" +"%Y-%m-%d %H:%M:%S %Z"
-	date -u -d "@${1}" +"%Y-%m-%d %H:%M:%S %Z"
-}
-
-# for scm
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' formats '(%s)-[%b]'
-zstyle ':vcs_info:*' actionformats '(%s)-[%b|%a]'
-precmd () {
-	psvar=()
-	LANG=C vcs_info
-	[[ -n "$vcs_info_msg_0_" ]] && psvar[1]="$vcs_info_msg_0_"
-}
-RPROMPT="$RPROMPT_DEFAULT %1(v|%F{green}%1v%f|)"
-
-# for direnv
-if builtin command -v direnv > /dev/null ; then
-    eval "$(direnv hook zsh)"
-fi
-
-# Go
-if [[ -d /usr/local/go/bin ]]; then
-    export GOPATH="$HOME/devel/go"
-    export PATH=/usr/local/go/bin:$GOPATH/bin:$PATH
-fi
-
-# Rust
-[[ -f $HOME/.cargo/env ]] && source $HOME/.cargo/env
+source ${ZDOTDIR:-${HOME}}/.zshrc.env
+source ${ZDOTDIR:-${HOME}}/.zshrc.input
+source ${ZDOTDIR:-${HOME}}/.zshrc.options
+source ${ZDOTDIR:-${HOME}}/.zshrc.alias
+source ${ZDOTDIR:-${HOME}}/.zshrc.functions
 
 # local設定の読み込み
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
-
-# 重複したPATHを削除
-typeset -U path

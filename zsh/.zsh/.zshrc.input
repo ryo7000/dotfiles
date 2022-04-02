@@ -1,0 +1,5 @@
+# Ctrl-eで、過去の最後の引数を挿入
+bindkey '^E' insert-last-word
+
+# Ctrl-fで、autosuggetの結果を受け入れる
+bindkey '^F' autosuggest-accept

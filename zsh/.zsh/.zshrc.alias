@@ -1,0 +1,11 @@
+alias d="ls --color"
+alias ls="ls --color=auto -F"
+alias ll="ls --color -F -l"
+alias grep='grep --color=auto'
+alias cp="cp -i"
+alias rm="rm -i"
+alias mv="mv -i"
+alias google="w3m www.google.co.jp"
+alias nvim="vim --cmd \"set ei=FileType\""
+alias tmux="tmux -2"
+

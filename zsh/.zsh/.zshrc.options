@@ -1,0 +1,50 @@
+# history
+
+## history ファイルに上書きせず、コマンドの終了を待たずに追加する
+setopt inc_append_history
+
+## 履歴ファイルに時刻を記録
+setopt extended_history
+
+## history (fc -l) コマンドをヒストリリストから取り除く。
+setopt hist_no_store
+
+# 展開関連設定
+
+## {a-c} を a b c に展開する機能を使えるようにする
+setopt brace_ccl
+
+## ファイル名の展開でディレクトリにマッチした場合末尾に / を付加する
+setopt mark_dirs
+
+## ファイル名の展開で、辞書順ではなく数値的にソートされるようになる
+setopt numeric_glob_sort
+
+## globにマッチしない場合に、標準出力にエラーを表示しない
+setopt nonomatch
+
+# 補完設定
+
+## コマンドラインの引数で --prefix=/usr などの = 以降でも補完できる
+setopt magic_equal_subst
+
+# 補完候補を ←↓↑→ で選択 (補完候補が色分け表示される)
+zstyle ':completion:*:default' menu select=1
+
+# その他
+
+## ビープ音を鳴らさないようにする
+setopt no_beep
+
+## コマンドのスペルチェックをする
+setopt correct
+
+## Ctrl+S/Ctrl+Q によるフロー制御を使わないようにする
+setopt no_flow_control
+stty -ixon
+
+## 8 ビット目を通すようになり、日本語のファイル名などを見れるようになる
+setopt print_eightbit
+
+## 文字列末尾に改行コードが無い場合でも表示する
+unsetopt promptcr
