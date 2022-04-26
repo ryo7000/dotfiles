@@ -92,6 +92,11 @@ if builtin command -v direnv > /dev/null ; then
 fi
 
 # Go
+if [[ -d /usr/local/go/bin ]]; then
+    path+=(/usr/local/go/bin)
+    export PATH
+fi
+
 if builtin command -v go > /dev/null ; then
     export GOPATH="$HOME/devel/go"
     path+=($GOPATH/bin)
