@@ -18,6 +18,8 @@
     mg = merge --no-ff
 [color]
     ui = true
+[commit]
+    verbose = true
 
 # カレントブランチと同名のリモートブランチが存在する場合のみ
 # カレントブランチのpushが行われる
