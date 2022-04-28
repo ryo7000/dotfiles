@@ -135,6 +135,7 @@ source ${ZDOTDIR:-${HOME}}/.zshrc.input
 source ${ZDOTDIR:-${HOME}}/.zshrc.options
 source ${ZDOTDIR:-${HOME}}/.zshrc.alias
 source ${ZDOTDIR:-${HOME}}/.zshrc.functions
+source ${ZDOTDIR:-${HOME}}/.zshrc.prompt
 
 # local設定の読み込み
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

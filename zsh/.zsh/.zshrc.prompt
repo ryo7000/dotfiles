@@ -1,0 +1,15 @@
+# コマンド実行後はrpromptを消す
+setopt transient_rprompt
+
+function _rprompt() {
+  local email=''
+  if [[ -n ${git_info} ]]; then
+      email=$(command git config user.email 2>/dev/null)
+  fi
+  if [[ "${email}" == 'ryo7000@gmail.com' ]]; then
+      email="🐈 ${email}"
+  fi
+  print "${email}"
+}
+
+RPROMPT='$(_rprompt)'
