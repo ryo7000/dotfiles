@@ -85,26 +85,3 @@ function ut2date () {
   date -d "@${1}" +"%Y-%m-%d %H:%M:%S %Z"
   date -u -d "@${1}" +"%Y-%m-%d %H:%M:%S %Z"
 }
-
-# direnv
-if builtin command -v direnv > /dev/null ; then
-    eval "$(direnv hook zsh)"
-fi
-
-# Go
-if [[ -d /usr/local/go/bin ]]; then
-    path+=(/usr/local/go/bin)
-    export PATH
-fi
-
-if builtin command -v go > /dev/null ; then
-    export GOPATH="$HOME/devel/go"
-    path+=($GOPATH/bin)
-    export PATH
-fi
-
-# Rust
-[[ -f $HOME/.cargo/env ]] && source $HOME/.cargo/env
-
-# homebrew
-[[ -f /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"

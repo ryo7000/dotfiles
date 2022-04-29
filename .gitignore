@@ -1,4 +1,5 @@
 vim/
+zsh/.zsh/.completions
 zsh/.zsh/.zcompdump
 zsh/.zsh/.zcompdump.zwc
 zsh/.zsh/.chpwd-recent-dirs

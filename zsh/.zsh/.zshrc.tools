@@ -1,0 +1,41 @@
+# fpath dir
+if [[ ! -d $ZDOTDIR/.completions ]]; then
+  mkdir $ZDOTDIR/.completions
+fi
+fpath+=($ZDOTDIR/.completions)
+
+# direnv
+if builtin command -v direnv > /dev/null ; then
+    eval "$(direnv hook zsh)"
+fi
+
+# Go
+if [[ -d /usr/local/go/bin ]]; then
+    path+=(/usr/local/go/bin)
+    export PATH
+fi
+
+if builtin command -v go > /dev/null ; then
+    export GOPATH="$HOME/devel/go"
+    path+=($GOPATH/bin)
+    export PATH
+fi
+
+# Rust
+if [[ -f $HOME/.cargo/env ]]; then
+  source $HOME/.cargo/env
+
+  if [[ ! -f $ZDOTDIR/.completions/_rustup ]]; then
+    rustup completions zsh > $ZDOTDIR/.completions/_rustup
+  fi
+
+  if [[ ! -f $ZDOTDIR/.completions/_cargo ]]; then
+    rustup completions zsh cargo > $ZDOTDIR/.completions/_cargo
+  fi
+fi
+
+# homebrew
+if [[ -f /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+    fpath+=($(brew --prefix)/share/zsh/site-functions)
+fi

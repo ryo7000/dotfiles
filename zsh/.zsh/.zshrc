@@ -89,6 +89,9 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 #typeset -A ZSH_HIGHLIGHT_STYLES
 #ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
 
+# tools & fpath
+source ${ZDOTDIR:-${HOME}}/.zshrc.tools
+
 # ------------------
 # Initialize modules
 # ------------------
