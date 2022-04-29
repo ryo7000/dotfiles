@@ -105,3 +105,6 @@ fi
 
 # Rust
 [[ -f $HOME/.cargo/env ]] && source $HOME/.cargo/env
+
+# homebrew
+[[ -f /opt/homebrew/bin/brew ]] && eval "$(/opt/homebrew/bin/brew shellenv)"
