@@ -131,6 +131,9 @@ for key ('j') bindkey -M vicmd ${key} history-substring-search-down
 unset key
 # }}} End configuration added by Zim install
 
+# history-substring-searchは前方一致検索のみ行う
+HISTORY_SUBSTRING_SEARCH_PREFIXED=true
+
 typeset -U path
 
 source ${ZDOTDIR:-${HOME}}/.zshrc.env
