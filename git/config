@@ -31,17 +31,17 @@
     rebase = true
 
 [include]
-	path = .gitconfig.local
+    path = ~/.config/git/.gitconfig.local
 [merge]
-	ff = false
+    ff = false
 [log]
-	decorate = auto
+    decorate = auto
 [url "github.com:ryo7000"]
     insteadOf = https://github.com/ryo7000
 [ghq]
     root = ~/devel/ghq
 [init]
-	defaultBranch = main
+    defaultBranch = main
 [includeIf "gitdir:~/dotfiles/"]
     path = ~/.config/git/config-priv
 [includeIf "gitdir:~/devel/ghq/"]

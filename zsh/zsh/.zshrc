@@ -146,4 +146,4 @@ source ${ZDOTDIR:-${HOME}}/.zshrc.functions
 source ${ZDOTDIR:-${HOME}}/.zshrc.prompt
 
 # local設定の読み込み
-[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
+[[ -f ${ZDOTDIR:-${HOME}}/.zshrc.local ]] && source ${ZDOTDIR:-${HOME}}/.zshrc.local
