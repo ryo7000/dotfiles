@@ -2,8 +2,6 @@
     name = ryo
     email = ryo7000@gmail.com
 [core]
-    excludesfile = /home/ryo/.gitignore
-
     # Add FRX (git default) option if $LESS does not include FRX.
     pager = less -FRX
     autoCRLF = false
@@ -45,6 +43,6 @@
 [init]
 	defaultBranch = main
 [includeIf "gitdir:~/dotfiles/"]
-    path = ~/.gitconfig-priv
+    path = ~/.config/git/config-priv
 [includeIf "gitdir:~/devel/ghq/"]
-    path = ~/.gitconfig-priv
+    path = ~/.config/git/config-priv
