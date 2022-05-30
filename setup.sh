@@ -31,13 +31,10 @@ mk_symlink "$HOME/dotfiles/alacritty/.alacritty.yml" "$HOME/.config/alacritty/al
 mk_symlink "$HOME/dotfiles/asdf/.asdfrc" "$HOME/.asdfrc"
 
 # git
-mkdir -p "$HOME/.config/git"
 delete_old "$HOME/.gitconfig"
 delete_old "$HOME/.gitconfig-priv"
 delete_old "$HOME/.gitignore"
-mk_symlink "$HOME/dotfiles/git/config" "$HOME/.config/git/config"
-mk_symlink "$HOME/dotfiles/git/config-priv" "$HOME/.config/git/config-priv"
-mk_symlink "$HOME/dotfiles/git/ignore" "$HOME/.config/git/ignore"
+mk_symlink "$HOME/dotfiles/git" "$HOME/.config/git"
 
 # tmux
 mk_symlink "$HOME/dotfiles/tmux/.tmux.conf" "$HOME/.tmux.conf"
