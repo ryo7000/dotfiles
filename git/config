@@ -44,5 +44,5 @@
     defaultBranch = main
 [includeIf "gitdir:~/dotfiles/"]
     path = ~/.config/git/config-priv
-[includeIf "gitdir:~/devel/ghq/"]
+[includeIf "gitdir:~/devel/ghq/github.com/ryo7000"]
     path = ~/.config/git/config-priv
