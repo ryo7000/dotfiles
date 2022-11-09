@@ -34,6 +34,8 @@
     path = ~/.gitconfig.local
 [merge]
     ff = false
+[rebase]
+    autosquash = true
 [log]
     decorate = auto
 [url "github.com:ryo7000"]
