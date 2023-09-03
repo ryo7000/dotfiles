@@ -91,8 +91,6 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 # tools & fpath
 source ${ZDOTDIR:-${HOME}}/.zshrc.tools
-# asdf
-source ${ZDOTDIR:-${HOME}}/.zshrc.asdf
 
 # ------------------
 # Initialize modules

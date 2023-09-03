@@ -9,6 +9,15 @@ if builtin command -v direnv > /dev/null ; then
     eval "$(direnv hook zsh)"
 fi
 
+# rtx
+if builtin command -v rtx > /dev/null ; then
+    eval "$(rtx activate zsh)"
+
+    if [[ ! -f $ZDOTDIR/.completions/_rtx ]]; then
+      rtx completions zsh > $ZDOTDIR/.completions/_rtx
+    fi
+fi
+
 # Go
 if [[ -d /usr/local/go/bin ]]; then
     path+=(/usr/local/go/bin)
