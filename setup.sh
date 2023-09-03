@@ -27,9 +27,6 @@ mkdir -p "$HOME/.config/alacritty"
 delete_old "$HOME/.alacritty.yml"
 mk_symlink "$HOME/dotfiles/alacritty/.alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
 
-# asdf
-mk_symlink "$HOME/dotfiles/asdf/.asdfrc" "$HOME/.asdfrc"
-
 # git
 delete_old "$HOME/.gitconfig"
 delete_old "$HOME/.gitconfig-priv"
