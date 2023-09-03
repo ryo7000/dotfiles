@@ -1,0 +1,4 @@
+# PATH
+path+=($HOME/bin)
+path+=($HOME/.local/bin)
+export PATH

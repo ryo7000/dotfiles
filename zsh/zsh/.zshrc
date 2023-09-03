@@ -89,6 +89,9 @@ ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 #typeset -A ZSH_HIGHLIGHT_STYLES
 #ZSH_HIGHLIGHT_STYLES[comment]='fg=242'
 
+# enable local bin
+source ${ZDOTDIR:-${HOME}}/.zshrc.path
+
 # tools & fpath
 source ${ZDOTDIR:-${HOME}}/.zshrc.tools
 
