@@ -9,3 +9,8 @@ alias google="w3m www.google.co.jp"
 alias nvim="vim --cmd \"set ei=FileType\""
 alias tmux="tmux -2"
 alias dc="docker compose"
+
+if [[ $(uname) == "Darwin" ]]; then
+    # https://github.com/jonas/tig/issues/1210
+    alias tig="TERM=xterm-256color tig"
+fi
