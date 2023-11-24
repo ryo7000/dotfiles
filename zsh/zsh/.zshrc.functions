@@ -19,7 +19,7 @@ function fzf-cdr () {
 
 function fzf-select-history() {
     local tac
-    if builtin command -v tac > /dev/null ; then
+    if command -v tac > /dev/null ; then
         tac="tac"
     else
         tac="tail -r"
@@ -57,7 +57,7 @@ function fzf-ghq-src() {
     zle -R -c
 }
 
-if builtin command -v fzf > /dev/null; then
+if command -v fzf > /dev/null; then
     # fzfでcdrを使う
     zle -N fzf-cdr
     bindkey '^J' fzf-cdr

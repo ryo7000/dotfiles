@@ -11,12 +11,12 @@ if [[ -f /opt/homebrew/bin/brew ]]; then
 fi
 
 # direnv
-if builtin command -v direnv > /dev/null ; then
+if command -v direnv > /dev/null ; then
     eval "$(direnv hook zsh)"
 fi
 
 # rtx
-if builtin command -v rtx > /dev/null ; then
+if command -v rtx > /dev/null ; then
     eval "$(rtx activate zsh)"
 
     if [[ ! -f $ZDOTDIR/.completions/_rtx ]]; then
@@ -30,7 +30,7 @@ if [[ -d /usr/local/go/bin ]]; then
     export PATH
 fi
 
-if builtin command -v go > /dev/null ; then
+if command -v go > /dev/null ; then
     export GOPATH="$HOME/devel/go"
     path+=($GOPATH/bin)
     export PATH
