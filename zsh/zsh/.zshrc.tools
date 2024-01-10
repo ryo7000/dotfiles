@@ -15,12 +15,12 @@ if command -v direnv > /dev/null ; then
     eval "$(direnv hook zsh)"
 fi
 
-# rtx
-if command -v rtx > /dev/null ; then
-    eval "$(rtx activate zsh)"
+# mise
+if command -v mise > /dev/null ; then
+    eval "$(mise activate zsh)"
 
-    if [[ ! -f $ZDOTDIR/.completions/_rtx ]]; then
-      rtx completions zsh > $ZDOTDIR/.completions/_rtx
+    if [[ ! -f $ZDOTDIR/.completions/_mise ]]; then
+      mise completions zsh > $ZDOTDIR/.completions/_mise
     fi
 fi
 
