@@ -24,6 +24,12 @@ if command -v mise > /dev/null ; then
     fi
 fi
 
+# rye
+if [[ -d /home/ryo/.rye/shims ]]; then
+    path+=(/home/ryo/.rye/shims)
+    export PATH
+fi
+
 # Go
 if [[ -d /usr/local/go/bin ]]; then
     path+=(/usr/local/go/bin)
