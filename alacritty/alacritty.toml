@@ -1,0 +1,44 @@
+[colors.primary]
+background = "0x000000"
+foreground = "0xfffafa"
+
+[font]
+size = 18.0
+
+[font.bold]
+family = "Cica"
+
+[font.bold_italic]
+family = "Cica"
+
+[font.italic]
+family = "Cica"
+
+[font.normal]
+family = "Cica"
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mode = "~Vi"
+mods = "Control|Shift"
+
+[[keyboard.bindings]]
+action = "PasteSelection"
+key = "Insert"
+mods = "Shift"
+
+[[keyboard.bindings]]
+chars = "\u001B[27;5;9~"
+key = "Tab"
+mods = "Control"
+
+[selection]
+save_to_clipboard = true
+
+[window]
+opacity = 0.8
+
+[window.padding]
+x = 2
+y = 2

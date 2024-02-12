@@ -25,7 +25,7 @@ function delete_old() {
 # alacritty
 mkdir -p "$HOME/.config/alacritty"
 delete_old "$HOME/.alacritty.yml"
-mk_symlink "$HOME/dotfiles/alacritty/.alacritty.yml" "$HOME/.config/alacritty/alacritty.yml"
+mk_symlink "$HOME/dotfiles/alacritty/alacritty.toml" "$HOME/.config/alacritty/alacritty.toml"
 
 # git
 delete_old "$HOME/.gitconfig"
