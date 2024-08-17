@@ -16,7 +16,7 @@ function mk_symlink() {
 function delete_old() {
     local target="${1}"
 
-    if [ -e "${target}" ]; then
+    if [ -L "${target}" ]; then
         echo "Found old path symlink. delete ${target}"
         rm -i "${target}"
     fi
@@ -34,7 +34,9 @@ delete_old "$HOME/.gitignore"
 mk_symlink "$HOME/dotfiles/git" "$HOME/.config/git"
 
 # tmux
-mk_symlink "$HOME/dotfiles/tmux/.tmux.conf" "$HOME/.tmux.conf"
+mkdir -p "$HOME/.config/tmux"
+delete_old "$HOME/.tmux.conf"
+mk_symlink "$HOME/dotfiles/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
 
 # zsh
 delete_old "$HOME/.zsh"
