@@ -37,6 +37,7 @@
     ff = false
 [rebase]
     autosquash = true
+    autostash = true
 [log]
     decorate = auto
 [url "github.com:ryo7000"]
