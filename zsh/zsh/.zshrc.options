@@ -12,7 +12,7 @@ setopt hist_no_store
 # 展開関連設定
 
 ## {a-c} を a b c に展開する機能を使えるようにする
-setopt brace_ccl
+# setopt brace_ccl
 
 ## ファイル名の展開でディレクトリにマッチした場合末尾に / を付加する
 setopt mark_dirs
