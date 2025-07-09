@@ -14,6 +14,17 @@ function _rprompt() {
 
 RPROMPT='$(_rprompt)'
 
+# docker 内では 🐳 を表示
+if (( ${+functions[_prompt_eriner_status]} )); then
+  functions -c _prompt_eriner_status _prompt_eriner_status_org
+
+  function _prompt_eriner_status() {
+    _prompt_eriner_status_org "$@"
+
+    [[ -e /.dockerenv ]] && print -n ' %F{cyan}🐳'
+  }
+fi
+
 # tag が表示できるときは tag を表示する
 zstyle ':zim:git-info:position' format '\ %p'
 zstyle ':zim:git-info:keys' format \
