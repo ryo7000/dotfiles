@@ -26,7 +26,7 @@ if (( ${+functions[_prompt_eriner_status]} )); then
 fi
 
 # tag が表示できるときは tag を表示する
-zstyle ':zim:git-info:position' format '\ %p'
+zstyle ':zim:git-info:position' format ' %p'
 zstyle ':zim:git-info:keys' format \
-  'prompt' '%b$(coalesce %p %c)%s' \
+  'prompt' '%b$(coalesce %p %c)%s%D' \
   'dirty' '%D'
