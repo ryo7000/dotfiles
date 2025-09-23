@@ -33,6 +33,11 @@ chars = "\u001B[27;5;9~"
 key = "Tab"
 mods = "Control"
 
+[[keyboard.bindings]]
+action = "CreateNewWindow"
+key = "N"
+mods = "Control|Shift"
+
 [selection]
 save_to_clipboard = true
 
