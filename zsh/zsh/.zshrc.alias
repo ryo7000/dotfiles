@@ -10,6 +10,7 @@ alias nvim="vim --cmd \"set ei=FileType\""
 alias tmux="tmux -2"
 alias dc="docker compose"
 alias j="just"
+alias difit="npx difit"
 
 if [[ $(uname) == "Darwin" ]]; then
     # https://github.com/jonas/tig/issues/1210
