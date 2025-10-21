@@ -9,7 +9,7 @@ zstyle ':completion:*' recent-dirs-insert both
 export FZF_DEFAULT_OPTS='--height 80% --reverse --border --no-sort --exact'
 
 function fzf-cdr () {
-    local selected_dir="$(cdr -l | sed -e 's/^[[:digit:]]*[[:blank:]]*//' | fzf --prompt "DIR>")"
+    local selected_dir="$(cdr -l | sed -e 's/^[[:digit:]]*[[:blank:]]*//' | fzf --prompt "DIR HISTORY>")"
     if [ -n "$selected_dir" ]; then
         BUFFER="cd ${selected_dir}"
         zle accept-line
@@ -60,7 +60,7 @@ function fzf-ghq-src() {
 if command -v fzf > /dev/null; then
     # fzfでcdrを使う
     zle -N fzf-cdr
-    bindkey '^J' fzf-cdr
+    bindkey '^h' fzf-cdr
 
     # search with fzf
     zle -N fzf-select-history
