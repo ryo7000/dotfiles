@@ -1,0 +1,9 @@
+{
+  "niri/window": {
+    "icon": true
+  },
+  "niri/workspaces": {
+    "format": "{value}"
+  }
+}
+

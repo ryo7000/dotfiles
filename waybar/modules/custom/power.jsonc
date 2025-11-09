@@ -1,0 +1,13 @@
+{
+  "custom/power": {
+    "format": "󰤄",
+    "menu": "on-click",
+    "menu-file": "~/.config/waybar/menu/power.xml",
+    "menu-actions": {
+      "lock": "loginctl lock-session",
+      "logout": "loginctl terminate-session \"$XDG_SESSION_ID\"",
+      "reboot": "systemctl reboot",
+      "shutdown": "systemctl poweroff"
+    }
+  }
+}

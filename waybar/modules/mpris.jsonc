@@ -1,0 +1,17 @@
+{
+  "mpris": {
+    "format": "{player_icon} {title} - {artist}",
+    "format-paused": "{status_icon} {title} - {artist}",
+    "tooltip-format": "Playing: {title} - {artist}",
+    "tooltip-format-paused": "Paused: {title} - {artist}",
+    "on-click": "~/.config/waybar/scripts/mpris.sh",
+    "on-click-middle": "playerctl play-pause",
+    "player-icons": {
+      "default": "󰐊"
+    },
+    "status-icons": {
+      "paused": "󰏤"
+    },
+    "max-length": 1000
+  }
+}

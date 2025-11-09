@@ -1,0 +1,9 @@
+xkb_keymap {
+  xkb_keycodes { include "evdev+aliases(qwerty)" };
+  xkb_types { include "complete" };
+  xkb_compatibility { include "complete+japan" };
+  xkb_symbols {
+    include "pc+jp+inet(evdev)"
+    key <MUHE> { [ Super_L ] };
+  };
+};
