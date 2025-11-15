@@ -57,7 +57,17 @@ enum VolumeChange {
     Lower,
 }
 
-fn main() -> Result<()> {
+fn main() {
+    if let Err(err) = run() {
+        eprintln!("{err}");
+        for cause in err.chain().skip(1) {
+            eprintln!("  caused by: {cause}");
+        }
+        std::process::exit(1);
+    }
+}
+
+fn run() -> Result<()> {
     let cli = Cli::parse();
     match cli.command {
         Commands::Audio(AudioCommand::Input(action)) => handle_audio(AudioTarget::Input, action),
