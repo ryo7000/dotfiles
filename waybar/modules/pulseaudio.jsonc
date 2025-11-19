@@ -24,9 +24,9 @@
     "min-length": 7,
     "max-length": 7,
     "on-click": "pavucontrol",
-    "on-click-middle": "~/.config/waybar/scripts/volume.sh output mute",
-    "on-scroll-up": "~/.config/waybar/scripts/volume.sh output raise",
-    "on-scroll-down": "~/.config/waybar/scripts/volume.sh output lower",
+    "on-click-middle": "~/.local/bin/waybar-helper audio output mute",
+    "on-scroll-up": "~/.local/bin/waybar-helper audio output raise",
+    "on-scroll-down": "~/.local/bin/waybar-helper audio output lower",
     "tooltip-format": "Output Device: {desc}"
   },
 
@@ -36,9 +36,9 @@
     "format-source-muted": "󰍭 {volume}%",
     "min-length": 7,
     "max-length": 7,
-    "on-click": "~/.config/waybar/scripts/volume.sh input mute",
-    "on-scroll-up": "~/.config/waybar/scripts/volume.sh input raise",
-    "on-scroll-down": "~/.config/waybar/scripts/volume.sh input lower",
+    "on-click": "~/.local/bin/waybar-helper audio input mute",
+    "on-scroll-up": "~/.local/bin/waybar-helper audio input raise",
+    "on-scroll-down": "~/.local/bin/waybar-helper audio input lower",
     "tooltip-format": "Input Device: {desc}"
   }
 }
