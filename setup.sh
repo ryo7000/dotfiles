@@ -43,9 +43,13 @@ delete_old "$HOME/.zsh"
 mk_symlink "$HOME/dotfiles/zsh/.zshenv" "$HOME/.zshenv"
 mk_symlink "$HOME/dotfiles/zsh/zsh" "$HOME/.config/zsh"
 
-mk_symlink "$HOME/dotfiles/niri" "$HOME/.config/niri"
-mk_symlink "$HOME/dotfiles/waybar" "$HOME/.config/waybar"
-mk_symlink "$HOME/dotfiles/wofi" "$HOME/.config/wofi"
-mk_symlink "$HOME/dotfiles/dunst" "$HOME/.config/dunst"
 mk_symlink "$HOME/dotfiles/foot" "$HOME/.config/foot"
 mk_symlink "$HOME/dotfiles/yazi" "$HOME/.config/yazi"
+
+if [ "$1" = "niri" ]; then
+    mk_symlink "$HOME/dotfiles/niri" "$HOME/.config/niri"
+    mk_symlink "$HOME/dotfiles/waybar" "$HOME/.config/waybar"
+    mk_symlink "$HOME/dotfiles/wofi" "$HOME/.config/wofi"
+    mk_symlink "$HOME/dotfiles/dunst" "$HOME/.config/dunst"
+    mk_symlink "$HOME/dotfiles/xdg-desktop-portal" "$HOME/.config/xdg-desktop-portal"
+fi
