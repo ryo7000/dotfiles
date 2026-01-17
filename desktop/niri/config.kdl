@@ -266,6 +266,12 @@ window-rule {
     open-maximized true
 }
 
+window-rule {
+    match app-id="com.mitchellh.ghostty"
+    draw-border-with-background false
+    open-maximized true
+}
+
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
 /-window-rule {
@@ -301,7 +307,7 @@ binds {
     Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+T hotkey-overlay-title="Open a Terminal: foot" { spawn "foot"; }
+    Mod+T hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
     Mod+D hotkey-overlay-title="Run an Application: wofi" { spawn "wofi"; }
     Mod+Space { spawn "wofi"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
