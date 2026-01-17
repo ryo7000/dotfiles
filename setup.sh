@@ -43,6 +43,7 @@ delete_old "$HOME/.zsh"
 mk_symlink "$HOME/dotfiles/zsh/.zshenv" "$HOME/.zshenv"
 mk_symlink "$HOME/dotfiles/zsh/zsh" "$HOME/.config/zsh"
 
+mk_symlink "$HOME/dotfiles/desktop/ghostty" "$HOME/.config/ghostty"
 mk_symlink "$HOME/dotfiles/foot" "$HOME/.config/foot"
 mk_symlink "$HOME/dotfiles/yazi" "$HOME/.config/yazi"
 
